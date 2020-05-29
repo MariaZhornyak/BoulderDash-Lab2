@@ -1,0 +1,11 @@
+C:\Users\User\Desktop\BoulderdashLab2\bin\Debug\netcoreapp3.1\BoulderdashLab2.exe
+C:\Users\User\Desktop\BoulderdashLab2\bin\Debug\netcoreapp3.1\BoulderdashLab2.deps.json
+C:\Users\User\Desktop\BoulderdashLab2\bin\Debug\netcoreapp3.1\BoulderdashLab2.runtimeconfig.json
+C:\Users\User\Desktop\BoulderdashLab2\bin\Debug\netcoreapp3.1\BoulderdashLab2.runtimeconfig.dev.json
+C:\Users\User\Desktop\BoulderdashLab2\bin\Debug\netcoreapp3.1\BoulderdashLab2.dll
+C:\Users\User\Desktop\BoulderdashLab2\bin\Debug\netcoreapp3.1\BoulderdashLab2.pdb
+C:\Users\User\Desktop\BoulderdashLab2\obj\Debug\netcoreapp3.1\BoulderdashLab2.csprojAssemblyReference.cache
+C:\Users\User\Desktop\BoulderdashLab2\obj\Debug\netcoreapp3.1\BoulderdashLab2.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\BoulderdashLab2\obj\Debug\netcoreapp3.1\BoulderdashLab2.AssemblyInfo.cs
+C:\Users\User\Desktop\BoulderdashLab2\obj\Debug\netcoreapp3.1\BoulderdashLab2.dll
+C:\Users\User\Desktop\BoulderdashLab2\obj\Debug\netcoreapp3.1\BoulderdashLab2.pdb

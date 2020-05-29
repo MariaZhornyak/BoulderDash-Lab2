@@ -88,5 +88,229 @@ namespace BoulderdashLab2
             }
         }
 
+        public string GameString
+        {
+            get
+            {
+                string s = "";
+
+                s += $"Points: {this.points}\nNumberOfDiamonds: {this.numberOfDiamonds}\nWidth: {this.width}\nHeight: {this.height}\n";
+
+                for (int i = 0; i < this.width; i++)
+                {
+                    for (int j = 0; j < this.height; j++)
+                    {
+                        s += this[j, i];
+                    }
+                    s += '\n';
+                }
+
+                return s;
+            }
+        }
+
+        public void MoveRight()
+        {
+            if (this.posX != this.width - 1)
+            {
+                if (this[this.posX + 1, this.posY] == Chars.diamond)
+                {
+                    // Process sound = new Process();
+                    // sound.EnableRaisingEvents = false; 
+                    // sound.StartInfo.FileName = "powershell";
+                    // sound.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'C:/Users/User/Downloads/BoulderDash/Crystall.wav').PlaySync();";
+                    // sound.Start();
+
+                    this[this.posX + 1, this.posY] = Chars.player;
+                    this[this.posX, this.posY] = ' ';
+                    this.points++;
+                    if (this.points == this.numberOfDiamonds)
+                    {
+                        this.gameEnded = true;
+                    }
+                    this.posX += 1;
+                }
+                else if (this[this.posX + 1, this.posY] == Chars.stone)
+                {
+                    if (this.posX != this.width - 2 && this[this.posX + 2, this.posY] != Chars.stone && this[this.posX + 2, this.posY] != Chars.diamond)
+                    {
+                        this[this.posX + 2, this.posY] = Chars.stone;
+                        this[this.posX + 1, this.posY] = Chars.player;
+                        this[this.posX, this.posY] = ' ';
+                        this.posX += 1;
+                    }
+                }
+                else if (this[this.posX + 1, this.posY] == Chars.sand || this[this.posX + 1, this.posY] == ' ')
+                {
+                    this[this.posX + 1, this.posY] = Chars.player;
+                    this[this.posX, this.posY] = ' ';
+                    this.posX += 1;
+                }
+            }
+        }
+
+        public void MoveLeft()
+        {
+            if (this.posX != 0)
+            {
+                if (this[this.posX - 1, this.posY] == Chars.diamond)
+                {
+                    // Process sound = new Process();
+                    // sound.EnableRaisingEvents = false; 
+                    // sound.StartInfo.FileName = "powershell";
+                    // sound.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'C:/Users/User/Downloads/BoulderDash/Crystall.wav').PlaySync();";
+                    // sound.Start();
+
+                    this[this.posX - 1, this.posY] = Chars.player;
+                    this[this.posX, this.posY] = ' ';
+                    this.points++;
+                    if (this.points == this.numberOfDiamonds)
+                    {
+                        this.gameEnded = true;
+                    }
+                    this.posX -= 1;
+                }
+                else if (this[this.posX - 1, this.posY] == Chars.stone)
+                {
+                    if (this.posX != 1 && this[this.posX - 2, this.posY] != Chars.stone && this[this.posX - 2, this.posY] != Chars.diamond)
+                    {
+                        this[this.posX - 2, this.posY] = Chars.stone;
+                        this[this.posX - 1, this.posY] = Chars.player;
+                        this[this.posX, this.posY] = ' ';
+                        this.posX -= 1;
+                    }
+                }
+                else if (this[this.posX - 1, this.posY] == Chars.sand || this[this.posX - 1, this.posY] == ' ')
+                {
+                    this[this.posX - 1, this.posY] = Chars.player;
+                    this[this.posX, this.posY] = ' ';
+                    this.posX -= 1;
+                }
+            }
+        }
+
+        public void MoveUp()
+        {
+            if (this.posY != 0)
+            {
+                if (this[this.posX, this.posY - 1] == Chars.diamond)
+                {
+                    // Process sound = new Process();
+                    // sound.EnableRaisingEvents = false; 
+                    // sound.StartInfo.FileName = "powershell";
+                    // sound.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'C:/Users/User/Downloads/BoulderDash/Crystall.wav').PlaySync();";
+                    // sound.Start();
+
+                    this[this.posX, this.posY - 1] = Chars.player;
+                    this[this.posX, this.posY] = ' ';
+                    this.points++;
+                    if (this.points == this.numberOfDiamonds)
+                    {
+                        this.gameEnded = true;
+                    }
+                    this.posY -= 1;
+                }
+                else if (this[this.posX, this.posY - 1] == Chars.stone)
+                {
+                    if (this.posY != 1 && this[this.posX, this.posY - 2] != Chars.stone && this[this.posX, this.posY - 2] != Chars.diamond)
+                    {
+                        this[this.posX, this.posY - 2] = Chars.stone;
+                        this[this.posX, this.posY - 1] = Chars.player;
+                        this[this.posX, this.posY] = ' ';
+                        this.posY -= 1;
+                    }
+                }
+                else if (this[this.posX, this.posY - 1] == Chars.sand || this[this.posX, this.posY - 1] == ' ')
+                {
+                    this[this.posX, this.posY - 1] = Chars.player;
+                    this[this.posX, this.posY] = ' ';
+                    this.posY -= 1;
+                }
+            }
+        }
+
+        public void MoveDown()
+        {
+            if (this.posY != this.height - 1)
+            {
+                if (this[this.posX, this.posY + 1] == Chars.diamond)
+                {
+                    // Process sound = new Process();
+                    // sound.EnableRaisingEvents = false; 
+                    // sound.StartInfo.FileName = "powershell";
+                    // sound.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'C:/Users/User/Downloads/BoulderDash/Crystall.wav').PlaySync();";
+                    // sound.Start();
+
+                    this[this.posX, this.posY + 1] = Chars.player;
+                    this[this.posX, this.posY] = ' ';
+                    this.points++;
+                    if (this.points == this.numberOfDiamonds)
+                    {
+                        this.gameEnded = true;
+                    }
+                    this.posY += 1;
+                }
+                else if (this[this.posX, this.posY + 1] == Chars.stone)
+                {
+                    if (this.posY != this.height - 2 && this[this.posX, this.posY + 2] != Chars.stone && this[this.posX, this.posY + 2] != Chars.diamond)
+                    {
+                        this[this.posX, this.posY + 2] = Chars.stone;
+                        this[this.posX, this.posY + 1] = Chars.player;
+                        this[this.posX, this.posY] = ' ';
+                        this.posY += 1;
+                    }
+                }
+                else if (this[this.posX, this.posY + 1] == Chars.sand || this[this.posX, this.posY + 1] == ' ')
+                {
+                    this[this.posX, this.posY + 1] = Chars.player;
+                    this[this.posX, this.posY] = ' ';
+                    this.posY += 1;
+                }
+            }
+        }
+
+        public void PrintField()
+        {
+            Console.Clear();
+
+            Console.WriteLine($"Your points: {this.points}");
+            for (int i = 0; i < this.height; i++)
+            {
+                for (int j = 0; j < this.width; j++)
+                {
+                    Console.ForegroundColor = Chars.blockColors[this[j, i]];
+                    Console.Write(this[j, i]);
+                    Console.ForegroundColor = Chars.defaultForegroundColor;
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("\nPress ESC to exit the game");
+        }
+
+        public void UpdateField()
+        {
+            Console.SetCursorPosition(0, 0);
+            Console.WriteLine($"Your points: {this.points}");
+
+            for (int i = 0; i < this.height; i++)
+            {
+                for (int j = 0; j < this.width; j++)
+                {
+                    if (this[j, i] != this.oldField[j, i])
+                    {
+                        Console.SetCursorPosition(j, i + 1);
+                        Console.ForegroundColor = Chars.blockColors[this[j, i]];
+                        Console.Write(this[j, i]);
+                        Console.ForegroundColor = Chars.defaultForegroundColor;
+
+                        this.oldField[j, i] = this[j, i];
+                    }
+                }
+            }
+
+            Console.SetCursorPosition(0, this.height + 1);
+        }
+
     }
 }
