@@ -75,14 +75,6 @@ namespace BoulderdashLab2
 
         static void PlayNewGame(Game game = null)
         {
-            // Process music = new Process();
-            // music.EnableRaisingEvents = false; 
-            // music.StartInfo.FileName = "powershell";
-            // music.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'music.wav').PlaySync();";
-            // music.Start();
-
-            // AppDomain.CurrentDomain.ProcessExit += new EventHandler((object sender, EventArgs e) => music.Kill());
-
             Console.Clear();
 
             if (game == null)
@@ -129,9 +121,7 @@ namespace BoulderdashLab2
                 game.UpdateField();
             }
 
-            // Console.BackgroundColor = ConsoleColor.Blue;
             Console.Clear();
-            // music.Kill();
         }
 
         static void LoadSavedGame()
@@ -148,14 +138,19 @@ namespace BoulderdashLab2
 
                 if (File.Exists(GameFileName))
                 {
+                    int points;
+                    int numberOfDiamonds;
+                    int width;
+                    int height;
+                    char[,] field;
                     using (StreamReader file = new StreamReader(GameFileName))
                     {
-                        int points = Convert.ToInt32(file.ReadLine().Split(' ')[1]);
-                        int numberOfDiamonds = Convert.ToInt32(file.ReadLine().Split(' ')[1]);
-                        int width = Convert.ToInt32(file.ReadLine().Split(' ')[1]);
-                        int height = Convert.ToInt32(file.ReadLine().Split(' ')[1]);
+                        points = Convert.ToInt32(file.ReadLine().Split(' ')[1]);
+                        numberOfDiamonds = Convert.ToInt32(file.ReadLine().Split(' ')[1]);
+                        width = Convert.ToInt32(file.ReadLine().Split(' ')[1]);
+                        height = Convert.ToInt32(file.ReadLine().Split(' ')[1]);
 
-                        char[,] field = new char[width, height];
+                        field = new char[width, height];
                         for (int i = 0; i < height; i++)
                         {
                             string row = file.ReadLine();
@@ -164,13 +159,13 @@ namespace BoulderdashLab2
                                 field[j, i] = row[j];
                             }
                         }
-
-                        Game game = new Game(width, height, field, points, numberOfDiamonds);
-
-                        PlayNewGame(game);
-
-                        return;
                     }
+
+                    Game game = new Game(width, height, field, points, numberOfDiamonds);
+
+                    PlayNewGame(game);
+
+                    return;
                 }
                 else
                 {

@@ -109,165 +109,51 @@ namespace BoulderdashLab2
             }
         }
 
-        public void MoveRight()
+        public void MovePlayer(int dX, int dY)
         {
-            if (this.posX != this.width - 1)
+            int newPosX = this.posX + dX;
+            int newPosY = this.posY + dY;
+            int afterNewPosX = this.posX + 2 * dX;
+            int afterNewPosY = this.posY + 2 * dY;
+            if (newPosX < 0 || newPosX > this.width - 1 || newPosY < 0 || newPosY > this.height - 1)
             {
-                if (this[this.posX + 1, this.posY] == Chars.diamond)
-                {
-                    // Process sound = new Process();
-                    // sound.EnableRaisingEvents = false; 
-                    // sound.StartInfo.FileName = "powershell";
-                    // sound.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'C:/Users/User/Downloads/BoulderDash/Crystall.wav').PlaySync();";
-                    // sound.Start();
+                return;
+            }
 
-                    this[this.posX + 1, this.posY] = Chars.player;
-                    this[this.posX, this.posY] = ' ';
-                    this.points++;
-                    if (this.points == this.numberOfDiamonds)
-                    {
-                        this.gameEnded = true;
-                    }
-                    this.posX += 1;
-                }
-                else if (this[this.posX + 1, this.posY] == Chars.stone)
+            if (this[newPosX, newPosY] == Chars.diamond)
+            {
+                this.points++;
+                if (this.points == this.numberOfDiamonds)
                 {
-                    if (this.posX != this.width - 2 && this[this.posX + 2, this.posY] != Chars.stone && this[this.posX + 2, this.posY] != Chars.diamond)
-                    {
-                        this[this.posX + 2, this.posY] = Chars.stone;
-                        this[this.posX + 1, this.posY] = Chars.player;
-                        this[this.posX, this.posY] = ' ';
-                        this.posX += 1;
-                    }
-                }
-                else if (this[this.posX + 1, this.posY] == Chars.sand || this[this.posX + 1, this.posY] == ' ')
-                {
-                    this[this.posX + 1, this.posY] = Chars.player;
-                    this[this.posX, this.posY] = ' ';
-                    this.posX += 1;
+                    this.gameEnded = true;
                 }
             }
-        }
-
-        public void MoveLeft()
-        {
-            if (this.posX != 0)
+            else if (this[newPosX, newPosY] == Chars.stone)
             {
-                if (this[this.posX - 1, this.posY] == Chars.diamond)
+                try
                 {
-                    // Process sound = new Process();
-                    // sound.EnableRaisingEvents = false; 
-                    // sound.StartInfo.FileName = "powershell";
-                    // sound.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'C:/Users/User/Downloads/BoulderDash/Crystall.wav').PlaySync();";
-                    // sound.Start();
-
-                    this[this.posX - 1, this.posY] = Chars.player;
-                    this[this.posX, this.posY] = ' ';
-                    this.points++;
-                    if (this.points == this.numberOfDiamonds)
+                    char afterNextSymbol = this[afterNewPosX, afterNewPosY];
+                    if (afterNextSymbol == Chars.stone || afterNextSymbol == Chars.diamond)
                     {
-                        this.gameEnded = true;
-                    }
-                    this.posX -= 1;
-                }
-                else if (this[this.posX - 1, this.posY] == Chars.stone)
-                {
-                    if (this.posX != 1 && this[this.posX - 2, this.posY] != Chars.stone && this[this.posX - 2, this.posY] != Chars.diamond)
-                    {
-                        this[this.posX - 2, this.posY] = Chars.stone;
-                        this[this.posX - 1, this.posY] = Chars.player;
-                        this[this.posX, this.posY] = ' ';
-                        this.posX -= 1;
+                        return;
                     }
                 }
-                else if (this[this.posX - 1, this.posY] == Chars.sand || this[this.posX - 1, this.posY] == ' ')
+                catch
                 {
-                    this[this.posX - 1, this.posY] = Chars.player;
-                    this[this.posX, this.posY] = ' ';
-                    this.posX -= 1;
+                    return;
                 }
             }
+
+            this[newPosX, newPosY] = Chars.player;
+            this[this.posX, this.posY] = ' ';
+            this.posX = newPosX;
+            this.posY = newPosY;
         }
 
-        public void MoveUp()
-        {
-            if (this.posY != 0)
-            {
-                if (this[this.posX, this.posY - 1] == Chars.diamond)
-                {
-                    // Process sound = new Process();
-                    // sound.EnableRaisingEvents = false; 
-                    // sound.StartInfo.FileName = "powershell";
-                    // sound.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'C:/Users/User/Downloads/BoulderDash/Crystall.wav').PlaySync();";
-                    // sound.Start();
-
-                    this[this.posX, this.posY - 1] = Chars.player;
-                    this[this.posX, this.posY] = ' ';
-                    this.points++;
-                    if (this.points == this.numberOfDiamonds)
-                    {
-                        this.gameEnded = true;
-                    }
-                    this.posY -= 1;
-                }
-                else if (this[this.posX, this.posY - 1] == Chars.stone)
-                {
-                    if (this.posY != 1 && this[this.posX, this.posY - 2] != Chars.stone && this[this.posX, this.posY - 2] != Chars.diamond)
-                    {
-                        this[this.posX, this.posY - 2] = Chars.stone;
-                        this[this.posX, this.posY - 1] = Chars.player;
-                        this[this.posX, this.posY] = ' ';
-                        this.posY -= 1;
-                    }
-                }
-                else if (this[this.posX, this.posY - 1] == Chars.sand || this[this.posX, this.posY - 1] == ' ')
-                {
-                    this[this.posX, this.posY - 1] = Chars.player;
-                    this[this.posX, this.posY] = ' ';
-                    this.posY -= 1;
-                }
-            }
-        }
-
-        public void MoveDown()
-        {
-            if (this.posY != this.height - 1)
-            {
-                if (this[this.posX, this.posY + 1] == Chars.diamond)
-                {
-                    // Process sound = new Process();
-                    // sound.EnableRaisingEvents = false; 
-                    // sound.StartInfo.FileName = "powershell";
-                    // sound.StartInfo.Arguments = "-c (New-Object Media.SoundPlayer 'C:/Users/User/Downloads/BoulderDash/Crystall.wav').PlaySync();";
-                    // sound.Start();
-
-                    this[this.posX, this.posY + 1] = Chars.player;
-                    this[this.posX, this.posY] = ' ';
-                    this.points++;
-                    if (this.points == this.numberOfDiamonds)
-                    {
-                        this.gameEnded = true;
-                    }
-                    this.posY += 1;
-                }
-                else if (this[this.posX, this.posY + 1] == Chars.stone)
-                {
-                    if (this.posY != this.height - 2 && this[this.posX, this.posY + 2] != Chars.stone && this[this.posX, this.posY + 2] != Chars.diamond)
-                    {
-                        this[this.posX, this.posY + 2] = Chars.stone;
-                        this[this.posX, this.posY + 1] = Chars.player;
-                        this[this.posX, this.posY] = ' ';
-                        this.posY += 1;
-                    }
-                }
-                else if (this[this.posX, this.posY + 1] == Chars.sand || this[this.posX, this.posY + 1] == ' ')
-                {
-                    this[this.posX, this.posY + 1] = Chars.player;
-                    this[this.posX, this.posY] = ' ';
-                    this.posY += 1;
-                }
-            }
-        }
+        public void MoveLeft() => MovePlayer(-1, 0);
+        public void MoveRight() => MovePlayer(1, 0);
+        public void MoveUp() => MovePlayer(0, -1);
+        public void MoveDown() => MovePlayer(0, 1);
 
         public void PrintField()
         {
