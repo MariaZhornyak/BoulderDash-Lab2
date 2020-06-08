@@ -87,7 +87,7 @@ namespace BoulderdashLab2
             {
                 if (game.gameEnded)
                 {
-                    Console.WriteLine("\nCongratulations, you won! Press any key to contunue.");
+                    Console.WriteLine("\nCongratulations, you won! Press any key to continue.");
                     Console.ReadKey(true);
                     break;
                 }
@@ -123,6 +123,7 @@ namespace BoulderdashLab2
 
             Console.Clear();
         }
+
 
         static void LoadSavedGame()
         {

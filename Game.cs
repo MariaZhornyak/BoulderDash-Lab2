@@ -137,6 +137,10 @@ namespace BoulderdashLab2
                     {
                         return;
                     }
+                    else
+                    {
+                        this[afterNewPosX, afterNewPosY] = Chars.stone;
+                    }
                 }
                 catch
                 {
